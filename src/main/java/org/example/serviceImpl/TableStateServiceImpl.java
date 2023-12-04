@@ -5,10 +5,13 @@ import org.example.repository.TableStateRepository;
 import org.example.service.TableStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TableStateServiceImpl implements TableStateService {
     @Autowired
@@ -51,6 +54,16 @@ public class TableStateServiceImpl implements TableStateService {
             return new ResponseEntity<>(tableStateList, HttpStatus.OK);
         } catch(Exception e){
             return ResponseEntity.internalServerError().body("Sever Error");
+        }
+    }
+
+    @Override
+    public TableState getTableStateById(Integer id) {
+        try{
+            Optional<TableState> tableStateList = tableStateRepository.findById(String.valueOf(id));
+            return tableStateList.get();
+        } catch(Exception e){
+            return null;
         }
     }
 

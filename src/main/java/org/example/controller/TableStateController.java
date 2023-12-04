@@ -16,13 +16,18 @@ public class TableStateController {
     public ResponseEntity<?> getTableState(@RequestParam Integer id){
         return tableStateService.getTableState(id);
     }
-    @GetMapping(value = "/type")
-    public ResponseEntity<?> getTableStateByType(@RequestParam String type){
+    @GetMapping(value = "/type/{type}")
+    public ResponseEntity<?> getTableStateByType(@PathVariable String type){
         return tableStateService.getTableStateByType(type);
     }
     @GetMapping(value = "/userId")
     public ResponseEntity<?> getTableStateByUserId(@RequestParam Integer id){
         return tableStateService.getTableStateByUserId(id);
+    }
+    @GetMapping(value = "/{id}")
+    @ResponseBody
+    public ResponseEntity<TableState> getTableStateById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(tableStateService.getTableStateById(id));
     }
     @PostMapping
     public ResponseEntity<?> createTableState(){
